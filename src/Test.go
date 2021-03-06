@@ -1,8 +1,9 @@
 package main
 
-
 import "fmt"
 
 func main() {
-	fmt.Println("Hello, 하잉")
+	var name int
+	name = 12
+	fmt.Println(name)
 }
