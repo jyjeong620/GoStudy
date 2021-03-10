@@ -1,32 +1,50 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+type person struct {
+	name    string
+	age     int
+	contact string
+}
 
 func main() {
 
-	//Struct1()
-	Struct2()
+	Struct1()
+	//Struct2()
 }
 
 func Struct1() {
-	//구초제 생성
-	type example struct {
-		flag    bool
-		counter int16
-		pi      float32
-	}
-	//선언시 기본값으로 초기화 된다
-	var e1 example
-	fmt.Printf("%+v\n", e1)
+	var p1 = person{}
+	fmt.Println("초기값 : ", p1)
+
+	p1.name = "kim"
+	p1.age = 25
+	p1.contact = "01000000000"
+	fmt.Println("기본 선언 : ", p1)
+
+	p2 := person{"nam", 31, "01022220000"} // 필드 이름을 생력할 시 순서대로 저장함
+	fmt.Println("생성자 생성과 동시에 선언(필드이름X) : ", p2)
+
+	p3 := person{contact: "01011110000", name: "park", age: 23} // 필드 이름을 명시할 시 순서와 상관 없이 저장할 수 있음
+	fmt.Println("생성자 생성과 동시에 선언(필드이름O) : ", p3)
+
+	p3.name = "ryu" //필드에 저장된 값을 수정할 수 있음
+	fmt.Println("필드값만 수정한 결과 : ", p3)
+
+	fmt.Println("필드값만 출력 : ", p3.contact) //필드 값의 개별 접근도 가능함
 }
 
 func Struct2() {
+	//초기화 작업
 	type example struct {
 		flag    bool
 		counter int16
 		pi      float32
 	}
-	//초기화 작업
+
 	e2 := example{
 		flag:    true,
 		counter: 10,

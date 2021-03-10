@@ -5,8 +5,8 @@ import "fmt"
 func main() {
 
 	//Declaration()
-	//ShortVariableDeclaration()
-	Conversion()
+	ShortVariableDeclaration()
+	//Conversion()
 }
 
 func Declaration() {
@@ -14,14 +14,19 @@ func Declaration() {
 	/**
 	 * var로 변수 선언시 제로값으로 초기화 된다
 	 */
-	var a int
-	var b string
+	var a bool
+	var b int
 	var c float64
-	var d bool
-	fmt.Printf("var a int \t %T [%v]\n", a, a)
-	fmt.Printf("var b string \t %T [%v]\n", b, b)
-	fmt.Printf("var c float64 \t %T [%v]\n", c, c)
-	fmt.Printf("var d bool \t %T [%v]\n\n", d, d)
+	var d complex128
+	var e string
+	var f *int
+
+	fmt.Printf("var a bool    \t [%v]\n", a)
+	fmt.Printf("var b int     \t [%v]\n", b)
+	fmt.Printf("var c float64 \t [%v]\n", c)
+	fmt.Printf("var d complex \t [%v]\n", d)
+	fmt.Printf("var e string  \t [%v]\n", e)
+	fmt.Printf("var f Pointer \t [%v]\n", f)
 }
 
 func ShortVariableDeclaration() {
@@ -31,10 +36,10 @@ func ShortVariableDeclaration() {
 	cc := 3.14159
 	dd := true
 
-	fmt.Printf("aa := 10 \t %T [%v]\n", aa, aa)
-	fmt.Printf("bb := \"hello\" \t %T [%v]\n", bb, bb)
-	fmt.Printf("cc := 3.14159 \t %T [%v]\n", cc, cc)
-	fmt.Printf("dd := true \t %T [%v]\n\n", dd, dd)
+	fmt.Printf("aa := 10       \t %T [%v]\n", aa, aa)
+	fmt.Printf("bb := \"hello\"  \t %T [%v]\n", bb, bb)
+	fmt.Printf("cc := 3.14159  \t %T [%v]\n", cc, cc)
+	fmt.Printf("dd := true     \t %T [%v]\n\n", dd, dd)
 }
 
 func Conversion() {
