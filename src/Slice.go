@@ -3,15 +3,53 @@ package main
 import "fmt"
 
 func main() {
-	//defaultDeclaration()
-	//makeDeclaration()
-	//nilSlice()
 	sliceTest()
 }
 func sliceTest() {
+	x := make([]int, 7)
+	for i := 0; i < 7; i++ {
+		x[i] = i * 100
+	}
+	twohundred := &x[1]
+	x = append(x, 800)
+	x[1]++
+	fmt.Printf("\n=> Slice and reference\n")
+	fmt.Println("twohundred:", *twohundred, "x[1]:", x[1])
 
+	fmt.Println(len(x), cap(x))
 }
 
+func copySlice() {
+	member := make([]string, 5, 8)
+	member[0] = "Gump"
+	member[1] = "Jonny"
+	member[2] = "Chris"
+	member[3] = "Binary"
+	member[4] = "Edgar"
+
+	copyMember := make([]string, 3, 4)
+	copy(copyMember, member)
+
+	fmt.Printf("\n=> original a slice\n")
+	inspectSlice(member)
+	fmt.Printf("\n=> Copy a slice\n")
+	inspectSlice(copyMember)
+}
+
+func sliceToSlice() {
+	member := make([]string, 5, 8)
+	member[0] = "Gump"
+	member[1] = "Jonny"
+	member[2] = "Chris"
+	member[3] = "Binary"
+	member[4] = "Edgar"
+
+	sliceMember := member[2:4]
+	sliceMember = append(sliceMember, "ADD")
+
+	inspectSlice(member)
+	inspectSlice(sliceMember)
+}
 func sliceAppend() {
 	oldMember := []string{"Gump", "Jonny", "Chris"}
 	newMember := []string{"Binary", "Edgar"}
@@ -51,25 +89,25 @@ func sliceAppend() {
 }
 
 func defaultDeclaration() {
-	var name []string
-	name = []string{"Gump", "Jonny", "Chris", "Binary", "Edgar"}
-	name[2] = "gump"
-	fmt.Println(name)
+	var member []string
+	member = []string{"Gump", "Jonny", "Chris", "Binary", "Edgar"}
+	member[2] = "gump"
+	fmt.Println(member)
 }
 
 func makeDeclaration() {
-	name := make([]string, 5, 10)
-	name[0] = "Gump"
-	name[1] = "Jonny"
-	name[2] = "Chris"
-	name[3] = "Binary"
-	name[4] = "Edgar"
-	fmt.Println(name)
-	fmt.Printf("len = %v , cap = %v\n", len(name), cap(name))
+	member := make([]string, 5, 10)
+	member[0] = "Gump"
+	member[1] = "Jonny"
+	member[2] = "Chris"
+	member[3] = "Binary"
+	member[4] = "Edgar"
+	fmt.Println(member)
+	fmt.Printf("len = %v , cap = %v\n", len(member), cap(member))
 
-	name = append(name, "GilDong")
-	fmt.Println(name)
-	fmt.Printf("len = %v , cap = %v\n", len(name), cap(name))
+	member = append(member, "GilDong")
+	fmt.Println(member)
+	fmt.Printf("len = %v , cap = %v\n", len(member), cap(member))
 
 }
 
@@ -82,4 +120,11 @@ func nilSlice() {
 	fmt.Println(a == nil) // true
 	fmt.Println(b == nil) // false
 	fmt.Println(c == nil) // false
+}
+
+func inspectSlice(slice []string) {
+	fmt.Printf("Length[%d] Capacity[%d]\n", len(slice), cap(slice))
+	for i := range slice {
+		fmt.Printf("[%d] %p %s\n", i, &slice[i], slice[i])
+	}
 }
