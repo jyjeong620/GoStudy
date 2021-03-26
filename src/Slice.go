@@ -6,17 +6,41 @@ func main() {
 	sliceTest()
 }
 func sliceTest() {
-	x := make([]int, 7)
-	for i := 0; i < 7; i++ {
-		x[i] = i * 100
+	//var data []string
+	data := make([]string, 1)
+	lastCap := cap(data)
+	for record := 1; record <= 102400; record++ {
+		data = append(data, fmt.Sprintf("Rec: %d", record))
+		if lastCap != cap(data) {
+			capChg := float64(cap(data)-lastCap) / float64(lastCap) * 100
+			fmt.Printf("Addr[%p]\tIndex[%d]\t\tCap[%d - %2.f%%]   \t %d\n", &data[0], record, cap(data), capChg, cap(data)-lastCap)
+			lastCap = cap(data)
+		}
 	}
-	twohundred := &x[1]
-	x = append(x, 800)
-	x[1]++
-	fmt.Printf("\n=> Slice and reference\n")
-	fmt.Println("twohundred:", *twohundred, "x[1]:", x[1])
 
-	fmt.Println(len(x), cap(x))
+	//var intData []float64
+	//intLastCap := cap(intData)
+	//for record := 1;record <= 102400;record++ {
+	//	intData = append(intData, float64(record))
+	//	if intLastCap != cap(intData) {
+	//		capChg := float64(cap(intData)-intLastCap) / float64(intLastCap) * 100
+	//		fmt.Printf("Addr[%p]\tIndex[%d]\t\tCap[%d - %2.f%%]   \t %d\n", &intData[0], record, cap(intData), capChg, cap(intData) -intLastCap)
+	//		intLastCap = cap(intData)
+	//	}
+	//}
+}
+
+func foo(n int) int {
+	i := 0
+
+	for true {
+		n = n >> 1
+		if n == 0 {
+			break
+		}
+		i++
+	}
+	return i
 }
 
 func copySlice() {
