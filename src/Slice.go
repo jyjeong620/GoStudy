@@ -1,33 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	sliceTest()
 }
 func sliceTest() {
-	//var data []string
-	data := make([]string, 1)
-	lastCap := cap(data)
-	for record := 1; record <= 102400; record++ {
-		data = append(data, fmt.Sprintf("Rec: %d", record))
-		if lastCap != cap(data) {
-			capChg := float64(cap(data)-lastCap) / float64(lastCap) * 100
-			fmt.Printf("Addr[%p]\tIndex[%d]\t\tCap[%d - %2.f%%]   \t %d\n", &data[0], record, cap(data), capChg, cap(data)-lastCap)
-			lastCap = cap(data)
-		}
-	}
 
-	//var intData []float64
-	//intLastCap := cap(intData)
-	//for record := 1;record <= 102400;record++ {
-	//	intData = append(intData, float64(record))
-	//	if intLastCap != cap(intData) {
-	//		capChg := float64(cap(intData)-intLastCap) / float64(intLastCap) * 100
-	//		fmt.Printf("Addr[%p]\tIndex[%d]\t\tCap[%d - %2.f%%]   \t %d\n", &intData[0], record, cap(intData), capChg, cap(intData) -intLastCap)
-	//		intLastCap = cap(intData)
-	//	}
-	//}
+	fruits := make([]string, 5)
+	fruits[0] = "Apple"
+	fruits[1] = "Orange"
+	fruits[2] = "Banana"
+	fruits[3] = "Grape"
+	fruits[4] = "Plum"
+
+	fmt.Printf("Length[%d] Capacity[%d] %v, %p\n", len(fruits), cap(fruits), fruits, &fruits[0])
+
+	// Banana를 삭제
+	fruits = append(fruits[:2], fruits[3:]...)
+
+	fmt.Printf("Length[%d] Capacity[%d] %v, %p\n", len(fruits), cap(fruits), fruits, &fruits[0])
+
 }
 
 func foo(n int) int {
