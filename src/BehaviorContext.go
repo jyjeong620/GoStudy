@@ -67,7 +67,7 @@ func (c *client) TypeAsContext() {
 // named Temporary then this is what we want. We get to stay decoupled and continue to work at the
 // interface level.
 type temporary interface {
-	temporary() bool
+	Temporary() bool
 }
 
 // BehaviorAsContext shows how to check for the behavior of an interface
@@ -81,7 +81,7 @@ func (c *client) BehaviorAsContext() {
 			// the concrete type stored inside the error interface also implement this interface.
 			// We can declare and leverage that interface ourselves.
 			case temporary:
-				if !e.temporary() {
+				if !e.Temporary() {
 					log.Println("Temporary: Client leaving chat")
 					return
 				}
