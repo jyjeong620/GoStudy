@@ -99,3 +99,7 @@ func (c *client) BehaviorAsContext() {
 		fmt.Println(line)
 	}
 }
+
+func main() {
+
+}

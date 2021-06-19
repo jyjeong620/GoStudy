@@ -95,6 +95,7 @@ func pull(x *Xenia, data []Data) (int, error) {
 // When it is done, we will test it. If it is not fast enough, we will add more complexities to
 // make it run faster.
 func store(p *Pillar, data []Data) (int, error) {
+	//fmt.Println("store : ",data)
 	for i := range data {
 		if err := p.Store(&data[i]); err != nil {
 			return i, err
@@ -111,6 +112,7 @@ func Copy(sys *System, batch int) error {
 
 	for {
 		i, err := pull(&sys.Xenia, data)
+		//fmt.Println("data : ",data)
 		if i > 0 {
 			if _, err := store(&sys.Pillar, data[:i]); err != nil {
 				return err

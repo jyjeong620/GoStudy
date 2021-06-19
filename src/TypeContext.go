@@ -30,7 +30,8 @@ type InvalidUnmarshalError struct {
 }
 
 // InvalidUnmarshalError implements the error interface.
-func (e *InvalidUnmarshalError) Error() string {
+func (e InvalidUnmarshalError) Error() string {
+	fmt.Println(e.Type.Kind())
 	if e.Type == nil {
 		return "json: Unmarshal(nil)"
 	}
@@ -47,8 +48,10 @@ type user2 struct {
 }
 
 func main() {
+
 	var u user2
-	err := Unmarshal([]byte(`{"name":"bill"}`), u) // Run with a value and pointer.
+	//u.Name = 1
+	err := Unmarshal([]byte(`{"name":"bill"}`), &u) // Run with a value and pointer.
 	if err != nil {
 		// This is a special type assertion that only works on the switch.
 		switch e := err.(type) {
@@ -74,6 +77,9 @@ func main() {
 // depending on these.
 func Unmarshal(data []byte, v interface{}) error {
 	rv := reflect.ValueOf(v)
+
+	fmt.Println("rv.kind : ", rv.Kind())
+	//fmt.Println("rv.IsNil : ", rv.IsNil())
 	if rv.Kind() != reflect.Ptr || rv.IsNil() {
 		return &InvalidUnmarshalError{reflect.TypeOf(v)}
 	}
